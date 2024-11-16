@@ -13,7 +13,7 @@ vector<pair<pair<int, int>, int>> CalcPrims(int n, int m, vector<pair<pair<int, 
     }
 
     vector<int> key(n, INT_MAX);
-    vector<bool> mstSet(n, false);
+    vector<bool> mst(n, false);
     vector<int> parent(n, -1);
 
     key[0] = 0;
@@ -23,18 +23,18 @@ vector<pair<pair<int, int>, int>> CalcPrims(int n, int m, vector<pair<pair<int, 
         int u = -1;
 
         for (int i = 0; i < n; i++) {
-            if (!mstSet[i] && (u == -1 || key[i] < key[u])) {
+            if (!mst[i] && (u == -1 || key[i] < key[u])) {
                 u = i;
             }
         }
 
-        mstSet[u] = true;
+        mst[u] = true;
 
         for (auto neighbour : adj[u]) {
             int v = neighbour.first;
             int weight = neighbour.second;
 
-            if (!mstSet[v] && weight < key[v]) {
+            if (!mst[v] && weight < key[v]) {
                 key[v] = weight;
                 parent[v] = u;
             }
